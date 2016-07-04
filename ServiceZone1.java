@@ -1,31 +1,30 @@
 
-public class ServiceZone1 extends ServiceZone {
-		
-		private double extraCost;
-		protected double shippingCost;
-		
-		//constructor
-		public ServiceZone1(double baseRate, double rate20, double rate75, double fuelSurcharge){
-			super(baseRate, rate20, rate75, fuelSurcharge);
-		}
-		
-		//extra charge for package over 10lb
-		public void getExtraCost(int weight){
-			extraCost = 0.0;
-			if(weight>FREE_WEIGHT && weight<=WEIGHT_LIMIT)
-				extraCost = (weight-10)*rate20;
-			else if(weight>WEIGHT_LIMIT && weight<=WEIGHT_BEYOND_SERVICE)
-				extraCost = (weight-10)*rate75;			
-		}
-		
-		//total shipping cost
-		public double getShippingCost(int weight){
-			if(weight <= WEIGHT_BEYOND_SERVICE && weight > 0)
-				shippingCost = getMinimumCost()+extraCost;			
-			else 
-				shippingCost = getMinimumCost();
-			return shippingCost;			
-		}
-
-
+public class ServiceZone1 extends ServiceZone {//  inheritance from super class.
+private double ExtraCost; 
+private double ShippingCost; 
+	
+	
+public ServiceZone1(double BaseRate, double Rate20, double Rate75, double fuelSurcharge)
+{
+	super(BaseRate,Rate20,Rate75,fuelSurcharge); //  super class
 }
+public double getExtraCost(int weight)  //calculate extra cost per extra pound
+{
+   ExtraCost=0; // reset ExtraCost
+  
+   if(weight>FREE_WEIGHT && weight<=WEIGHT_LIMIT){ExtraCost=(weight-FREE_WEIGHT)*getRate20();// 10<weight<20
+   }else if(weight>WEIGHT_LIMIT && weight<= WEIGHT_BEYOND_SERVICE){ExtraCost=(weight-FREE_WEIGHT)*getRate75();}//20<weight<75
+   
+   return ExtraCost;
+ }
+
+
+public double getShippingCost(int weight) // over write the method
+{
+  ShippingCost=0; // reset getShippingCost
+  if(weight<=FREE_WEIGHT){ShippingCost=getMinimumCost();}// if < 10bls , MinimumCost is charged
+  else{ShippingCost=getMinimumCost()+getExtraCost(weight);} // if >10 bls , MinimumCost +extra cost.
+
+return ShippingCost;
+ }
+ }

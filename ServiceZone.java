@@ -9,13 +9,13 @@
 public abstract class ServiceZone 
 {
 	
-	final int FREE_WEIGHT = 10;
-	final int WEIGHT_LIMIT = 20;
+	final int FREE_WEIGHT =10;
+	final int WEIGHT_LIMIT =20;
 	final int WEIGHT_BEYOND_SERVICE = 75;
-	protected double baseRate; 
+	protected double baseRate;  // base rate
 	protected double rate20; //rate per extra pound between free weight and 20lb
 	protected double rate75; //rate per extra pound between 20lb and 75lb
-	protected double fuelSurcharge;
+	protected double fuelSurcharge; 
 	
 	/**
 	 * @param baseRate
@@ -36,8 +36,8 @@ public abstract class ServiceZone
 	 */
 	public double getMinimumCost()
 	{
-		 //Provide code to implement this method
-		return baseRate + fuelSurcharge;
+	    return getBaseRate()+getFuelSurcharge(); //minimum cost equals to base rate+ FuelSurcharge
+	    
 
 	}
 
@@ -49,7 +49,6 @@ public abstract class ServiceZone
 	}
 
 	/**
-	 * 
 	 * @return rate per extra pound between free weight and 20lb
 	 */
 	public double getRate20() 

@@ -1,8 +1,8 @@
 
 /**********************************************************************File: A1.java
-Student Number: 213259205
-Family Name: Cai
-Given Name: Enmian
+Student Number: 210600534
+Family Name: Gilani
+Given Name: Umar
 
 Marking Template:
 
@@ -90,17 +90,25 @@ public class A1 {
 		        	weight = inl.nextInt();		        	       		
 		        	
 			        ServiceZone zone = null;
-			        try {
+			        try {   
+                          ZoneMap Map = new ZoneMap(postCodeFile); // building obejct
+			              zone= Map.getValidZone(postCode); // find zone 
+			              double ShippingCost;
+                          if(zone==null){
+                          System.out.println("This PostCode is out of service"); // no zone available for the postcode enter
+                          }else{
+                          
+                          if(weight>75){System.out.println("This is too heavy");}// over 75bls , cannot be delivered
+                          else{
+                          ShippingCost=zone.getShippingCost(weight);   // call Shipping Cost method
+			              System.out.printf("The shipping cost is "+ "%.2f",ShippingCost);  // 2 digits
+				          System.out.println(); 
+				          }
+                          }
+                                      
 
- 					//Provide code to print the shipping cost
-					ZoneMap zMap = new ZoneMap(postCodeFile);
-					zone = zMap.getValidZone(postCode);				
-					if (zone != null){
-						System.out.println("The shipping cost is " + zone.getShippingCost(weight));
-					}
-					else
-						System.out.println("This post code is not valid.");
-										        
+ 					
+				        
 					} catch (FileNotFoundException e) {
 						System.out.println(postCodeFile + "The system cannot find the file specified");
 					}	
